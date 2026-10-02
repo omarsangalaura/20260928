@@ -1,0 +1,32 @@
+name: CI CD con Release
+on:
+  push:
+    branches: [ main ]
+    # Solo reconoce tags
+    tags:
+      - 'v*'
+jobs:
+  build-test-release:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.1.0
+      - name: Configurar JDK 25
+        uses: actions/setup-java@v6.0.1
+        with:
+          distribution: 'temurin'
+          java-version: '25'
+      - name: Compilar el proyecto con tests
+        run: mvn clean package
+      - name: Crear release y subir assets
+        # Condición ejecución del paso solo si hay tag
+        if: startsWith( github.ref, 'refs/tags/v' )
+        uses: softprops/action-gh-release@v3.0.0
+        with:
+          files: |
+            moduloa/target/moduloa-0.0.1-SNAPSHOT.jar
+            modulob/target/modulob-0.0.1-SNAPSHOT.jar
+            moduloc/target/moduloc-0.0.1-SNAPSHOT.jar
+        # No olvidar inclusión del token de la máquina virtual en github
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

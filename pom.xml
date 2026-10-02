@@ -11,7 +11,8 @@
 	<groupId>com.omarsanga</groupId>
 	<artifactId>ejemplo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name/>
+    <packaging>pom</packaging>
+    <name/>
 	<description/>
 	<url/>
 	<licenses>
@@ -20,7 +21,12 @@
 	<developers>
 		<developer/>
 	</developers>
-	<scm>
+    <modules>
+        <module>moduloa</module>
+	    <module>modulob</module>
+	    <module>moduloc</module>
+	</modules>
+    <scm>
 		<connection/>
 		<developerConnection/>
 		<tag/>

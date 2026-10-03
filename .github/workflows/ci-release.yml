@@ -28,7 +28,7 @@ jobs:
       - name: Ejecutar las pruebas
         run: |
           sleep 30
-          mvn clean package
+          mvn test
       - name: Crear release y subir assets
         # Condición ejecución del paso solo si hay tag
         if: startsWith( github.ref, 'refs/tags/v' )

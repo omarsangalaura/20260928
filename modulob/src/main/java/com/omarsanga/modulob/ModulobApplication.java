@@ -8,7 +8,7 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 public class ModulobApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ModulobApplication.class);
+        SpringApplication.run(ModulobApplication.class, args);
     }
 
     @Bean

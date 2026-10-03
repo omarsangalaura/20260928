@@ -18,8 +18,17 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '25'
-      - name: Compilar el proyecto con tests
-        run: mvn clean package
+      - name: Compilar el proyecto sin tests
+        run: mvn clean package -DskipTests
+      - name: Ejecutar servicios para las pruebas
+        run: |
+          java -jar moduloa/target/moduloa-0.0.1-SNAPSHOT.jar &
+          java -jar modulob/target/modulob-0.0.1-SNAPSHOT.jar &
+          java -jar moduloc/target/moduloc-0.0.1-SNAPSHOT.jar &
+      - name: Ejecutar las pruebas
+        run: |
+          sleep 30
+          mvn clean package
       - name: Crear release y subir assets
         # Condición ejecución del paso solo si hay tag
         if: startsWith( github.ref, 'refs/tags/v' )

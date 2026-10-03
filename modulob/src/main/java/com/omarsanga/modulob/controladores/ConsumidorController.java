@@ -8,7 +8,7 @@ import org.springframework.web.client.RestTemplate;
 public class ConsumidorController {
     private final RestTemplate restTemplate;
 
-    ConsumidorController(RestTemplate restTemplate){
+    public ConsumidorController(RestTemplate restTemplate){
         this.restTemplate = restTemplate;
     }
 

@@ -41,6 +41,24 @@ jobs:
         # No olvidar inclusión del token de la máquina virtual en github
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Creando el release en GitHub
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v3.0.0
+          release_name: "Release v3.0.0"
+          prerelease: 'false'
+      - name: Upload de assets en un release (usando upload-release)
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./moduloa/target/moduloa-0.0.1-SNAPSHOT.jar
+          asset_name: ModuloA.jar
+          asset_content_type: application/java-archive
   generar-artifacts:
     runs-on: ubuntu-latest
     steps:

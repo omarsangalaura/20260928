@@ -63,3 +63,10 @@ jobs:
             moduloa/target/*.jar
             modulob/target/*.jar
             moduloc/target/*.jar
+      - name: Download de todos los JARS
+        uses: actions/download-artifact@v8.0.1
+        with:
+          name: springboot-modulos
+          path: ./ejecutables
+      - name: Mostrando JARs descargados
+        run: ls -R ./ejecutables

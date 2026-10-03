@@ -56,7 +56,7 @@ jobs:
       - name: Listar todos los ejecutables *.jar
         run: find . -type f -name "*.jar"
       - name: Upload de todos los JARS
-        uses: actions/upload-artifacts@v7.0.1
+        uses: actions/upload-artifact@v7.0.1
         with:
           name: springboot-modulos
           path: |

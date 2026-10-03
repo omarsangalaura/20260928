@@ -41,3 +41,25 @@ jobs:
         # No olvidar inclusión del token de la máquina virtual en github
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  generar-artifacts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.1.0
+      - name: Configurar JDK 25
+        uses: actions/setup-java@v6.0.1
+        with:
+          distribution: 'temurin'
+          java-version: '25'
+      - name: Compilando todos los módulos
+        run: mvn clean package -DskipTests
+      - name: Listar todos los ejecutables *.jar
+        run: find . -type f -name "*.jar"
+      - name: Upload de todos los JARS
+        uses: actions/upload-artifacts@v7.0.1
+        with:
+          name: springboot-modulos
+          path: |
+            moduloa/target/*.jar
+            modulob/target/*.jar
+            moduloc/target/*.jar
